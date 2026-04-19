@@ -1,10 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { COLORS, WEIGHTS } from '../../constants';
+import { BREAKPOINTS, COLORS, WEIGHTS } from '../../constants';
 import Logo from '../Logo';
 import SuperHeader from '../SuperHeader';
 import MobileMenu from '../MobileMenu';
+import Icon from '../Icon';
+import VisuallyHidden from '../VisuallyHidden';
+import UnstyledButton from '../UnstyledButton';
 
 const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
@@ -21,21 +24,32 @@ const Header = () => {
         <Side>
           <Logo />
         </Side>
-        <Nav>
-          <NavLink href="/sale">Sale</NavLink>
-          <NavLink href="/new">New&nbsp;Releases</NavLink>
-          <NavLink href="/men">Men</NavLink>
-          <NavLink href="/women">Women</NavLink>
-          <NavLink href="/kids">Kids</NavLink>
-          <NavLink href="/collections">Collections</NavLink>
-        </Nav>
+        <DesktopNav>
+          <NavLink href='/sale'>Sale</NavLink>
+          <NavLink href='/new'>New&nbsp;Releases</NavLink>
+          <NavLink href='/men'>Men</NavLink>
+          <NavLink href='/women'>Women</NavLink>
+          <NavLink href='/kids'>Kids</NavLink>
+          <NavLink href='/collections'>Collections</NavLink>
+        </DesktopNav>
+        <MobileActions>
+          <ShoppingCartButton>
+            <VisuallyHidden>Cart</VisuallyHidden>
+            <Icon id='shopping-bag' />
+          </ShoppingCartButton>
+          <UnstyledButton>
+            <VisuallyHidden>Search</VisuallyHidden>
+            <Icon id='search' />
+          </UnstyledButton>
+          <UnstyledButton onClick={() => setShowMobileMenu(true)}>
+            <VisuallyHidden>Menu</VisuallyHidden>
+            <Icon id='menu' />
+          </UnstyledButton>
+        </MobileActions>
         <Side />
       </MainHeader>
 
-      <MobileMenu
-        isOpen={showMobileMenu}
-        onDismiss={() => setShowMobileMenu(false)}
-      />
+      <MobileMenu isOpen={showMobileMenu} onDismiss={() => setShowMobileMenu(false)} />
     </header>
   );
 };
@@ -46,16 +60,45 @@ const MainHeader = styled.div`
   padding: 18px 32px;
   height: 72px;
   border-bottom: 1px solid ${COLORS.gray[300]};
+
+  @media (max-width: ${BREAKPOINTS.phone}) {
+    align-items: center;
+    padding-inline: 16px;
+  }
 `;
 
-const Nav = styled.nav`
+const DesktopNav = styled.nav`
   display: flex;
   gap: 48px;
   margin: 0px 48px;
+
+  @media (max-width: ${BREAKPOINTS.tablet}) {
+    & {
+      display: none;
+    }
+  }
+`;
+
+const MobileActions = styled.div`
+  display: none;
+
+  @media (max-width: ${BREAKPOINTS.tablet}) {
+    display: flex;
+    margin-left: auto;
+    gap: 32px;
+  }
+
+  @media (max-width: ${BREAKPOINTS.phone}) {
+    gap: 16px;
+  }
 `;
 
 const Side = styled.div`
   flex: 1;
+
+  @media (max-width: ${BREAKPOINTS.laptop}) {
+    flex: unset;
+  }
 `;
 
 const NavLink = styled.a`
@@ -68,6 +111,10 @@ const NavLink = styled.a`
   &:first-of-type {
     color: ${COLORS.secondary};
   }
+`;
+
+const ShoppingCartButton = styled(UnstyledButton)`
+  transform: translateX(-2px);
 `;
 
 export default Header;
