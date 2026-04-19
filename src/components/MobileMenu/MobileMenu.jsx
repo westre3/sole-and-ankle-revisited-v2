@@ -5,7 +5,6 @@ import UnstyledButton from '../UnstyledButton';
 import Icon from '../Icon';
 import VisuallyHidden from '../VisuallyHidden';
 import * as Dialog from '@radix-ui/react-dialog';
-import { COLORS } from '../../constants';
 
 const MobileMenu = ({ isOpen, onDismiss }) => {
   return (
@@ -42,7 +41,7 @@ const MobileMenu = ({ isOpen, onDismiss }) => {
 const Overlay = styled(Dialog.Overlay)`
   position: fixed;
   inset: 0;
-  background-color: ${COLORS.gray[700]};
+  background-color: var(--color-gray-700);
   opacity: 0.8;
 `;
 
@@ -52,7 +51,7 @@ const Content = styled(Dialog.Content)`
   right: 0;
   bottom: 0;
   width: 80vw;
-  background: ${COLORS.white};
+  background: var(--color-white);
 
   display: flex;
   flex-direction: column;
@@ -73,12 +72,12 @@ const Nav = styled.nav`
 const NavLink = styled.a`
   text-decoration: none;
   text-transform: uppercase;
-  color: ${COLORS.gray[900]};
+  color: var(--color-gray-000);
   font-size: 1.125rem;
   font-weight: 600;
 
   &:first-of-type {
-    color: ${COLORS.secondary};
+    color: var(--color-secondary);
   }
 `;
 
@@ -91,7 +90,7 @@ const Footer = styled.footer`
 const FooterLink = styled.a`
   text-decoration: none;
   text-transform: uppercase;
-  color: ${COLORS.gray[700]};
+  color: var(--color-gray-700);
   font-size: 0.875rem;
   font-weight: 500;
 `;
