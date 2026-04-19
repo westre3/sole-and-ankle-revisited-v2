@@ -58,8 +58,8 @@ const MainHeader = styled.div`
   display: flex;
   align-items: baseline;
   padding: 18px 32px;
-  height: 72px;
   border-bottom: 1px solid ${COLORS.gray[300]};
+  overflow-x: auto;
 
   @media (max-width: ${BREAKPOINTS.phone}) {
     align-items: center;
@@ -69,7 +69,7 @@ const MainHeader = styled.div`
 
 const DesktopNav = styled.nav`
   display: flex;
-  gap: 48px;
+  gap: clamp(1.3rem, 7.7vw - 3.5rem, 5rem);
   margin: 0px 48px;
 
   @media (max-width: ${BREAKPOINTS.tablet}) {
